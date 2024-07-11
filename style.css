@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+form{
+    max-width: 450px;
+    width: 450px;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+input , select{
+    padding: 12px;
+    border: solid 1px #cecece;
+    border-radius: 8px;
+    outline: none;
+}
+button{
+    padding: 12px;
+    border: solid 1px #cecece;
+    border-radius: 8px;
+    background-color: rgb(53, 52, 52);
+    color: #dbd7d7;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+button:hover{
+    background-color: rgb(184, 180, 180);
+    color: #383737;
+}
+.error{
+    border: solid 1px #e01919;
+}
+.correcto{
+    border: solid 1px #5dc52d;
+}

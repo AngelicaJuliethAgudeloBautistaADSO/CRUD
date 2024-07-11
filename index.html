@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form>
+        <label for="Nombre">Nombre</label>
+        <input type="text" id="nombre" autocomplete="off">
+    
+        <label for="Apellidos">Apellidos</label>
+        <input type="text" id="apellidos" autocomplete="off">
+
+        <label for="telefono">telefono</label>
+        <input type="number" id="telefono" autocomplete="off">
+        
+        <label for="direccion">direccion</label>
+        <input type="text" id="direccion" autocomplete="off">
+        
+        <label for="tipo-documento">tipo de documento</label>
+        <select id="tipo">
+            <option value="">Seleccione</option>
+            <option value="1">Tarjeta de identidad</option>
+            <option value="2">Cedula de ciudadania</option>
+            <option value="3">Otro</option>
+        </select>
+        <label for="Documento">Documento</label>
+        <input type="number" id="documento" autocomplete="off">
+        
+        <div>
+            <input type="checkbox" id="politicas">   
+            <label for="politicas">
+                Acepta las politicas de uso
+            </label>
+        </div>
+        
+        <button type="summit" >Enviar</button>
+    </form>
+    <script src="app.js"></script>
+</body>
+</html>
