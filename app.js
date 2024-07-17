@@ -7,6 +7,12 @@ const direccion = document.querySelector("#direccion");
 const tipo = document.querySelector("#tipo");
 const documento = document.querySelector("#documento");
 
+const checkbox  = document.querySelector("#politicas");
+const summitBtn  = document.querySelector("#summit");
+
+nombre.addEventListener("blur", validarNombre);
+apellidos.addEventListener("blur", validarApellidos);
+
 const validar = () => {
     event.preventDefault()
     console.log(nombre.value)//value: valida el valor que se encuentra en la casilla nombre
@@ -80,7 +86,6 @@ tipo.addEventListener("blur", (event)=>{
 documento.addEventListener("blur", (event)=>{
     remover(event, documento)
 })
-
 // nombre.addEventListener("blur", function () {
 //     if (nombre.value === "") {
 //         nombre.classList.add("error")
@@ -94,3 +99,38 @@ documento.addEventListener("blur", (event)=>{
 //     event.preventDefault();
 //     console.log(event)
 // })
+
+
+
+function validarNombre() {
+    const valorNombre = nombre.value.trim();
+    if (valorNombre === "" || valorNombre.length < 3 || !esTexto(valorNombre)) {
+      nombre.classList.add("error");
+      return false;
+    } else {
+      nombre.classList.remove("error");
+      return true;
+    }
+  }
+  
+  function validarApellidos() {
+    const valorApellidos = apellidos.value.trim();
+    if (valorApellidos === "" || valorApellidos.length < 3 || !esTexto(valorApellidos)) {
+      apellidos.classList.add("error");
+      return false;
+    } else {
+      apellidos.classList.remove("error");
+      return true;
+    }
+  }
+  
+  function esTexto(valor) {
+    const soloTexto = /^[a-zA-Z\s]+$/;
+    return soloTexto.test(valor);
+  }
+
+politicas.addEventListener("change", () => {
+    summitBtn .disabled = !checkbox.checked;
+});
+
+summitBtn .disabled = true;
