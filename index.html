@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form>
+    <form class="form" novalidate>
         <label for="Nombre">Nombre</label>
         <input  id="nombre" autocomplete="off">
     
@@ -27,11 +27,11 @@
             <option value="2">Cedula de ciudadania</option>
             <option value="3">Otro</option>
         </select>
-        <label for="Documento">Documento</label>
+        <label for="documento">Documento</label>
         <input  id="documento" autocomplete="off">
 
         <label for="email">Email</label>
-        <input id="email" autocomplete="off">
+        <input id="email" autocomplete="off" required>
 
         <div>
             <input type="checkbox" id="politicas">   

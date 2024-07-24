@@ -1,3 +1,4 @@
+import IsEmail from ".modulos.js";
 const $formulario = document.querySelector("form");
 const nombre = document.querySelector("#nombre");
 const apellidos = document.querySelector("#apellidos");
@@ -6,7 +7,8 @@ const direccion = document.querySelector("#direccion");
 const tipo = document.querySelector("#tipo");
 const documento = document.querySelector("#documento");
 const politicas = document.querySelector("#politicas");
-const boton = document.querySelector("#boton")
+const boton = document.querySelector("#boton");
+const correo = document.querySelector("#email")
 
 const validar = () => {
     event.preventDefault()
@@ -52,6 +54,12 @@ const validar = () => {
         documento.classList.add("error")
     }
 
+    console.log(email.value)
+    if (email.value === "") {
+        // alert("el campo documento es obligatorio")
+        email.focus()
+        email.classList.add("error")
+    }
 
 }
 //quitar el borde rojo al momento que se ingresen los datos y la casilla deje de estar vacia
@@ -65,7 +73,6 @@ const remover = (e, input) =>{
     }
 }
 $formulario.addEventListener("submit" , validar);
-
 nombre.addEventListener("blur", (event) => {
     remover(event, nombre);
 });
@@ -96,7 +103,6 @@ documento.addEventListener("blur", (event) => {
 //     event.preventDefault();
 //     console.log(event)
 // })
-
 $formulario.addEventListener("submit", validar);
 nombre.addEventListener("keydown", (event) => {
     remover(event, nombre);
@@ -162,6 +168,31 @@ const numeros =(event) =>{
         console.log("a");
     }
 }
+
+// const correo =(event) =>{
+//     let correo = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+//     if (!correo.test(event.target.value)) {
+//         console.log("si")
+//     }else{
+//         console.log("no")
+//     }
+// }
+
+// const gmail = (event,elemento) =>{
+// let expresion = /[\w._+-]+@[\w.-]+(\.[a-zA-Z]{2,3}){1,2}/;
+//     console.log(expresion, elemento.value);
+//     console.log(expresion.test(elemento.value));
+//     if (expresion.test(elemento.value)) {
+//         alert("Si funciona");
+//         elemento.classList.add("correcto")
+//         elemento.classList.remove("error")
+//     } else{
+//         alert("No funciona")
+//         elemento.classList.add("error")
+//         elemento.classList.remove("correcto")
+//     }   
+// }
+
 // const letras = (event) =>{
 //     // if (event.keyCode < 97 || event.keyCode > 122 && event.keyCode === [250, 243, 237, 233, 225].includes(charCode)){
 //     //     event.preventDefault();
@@ -201,7 +232,11 @@ const numeros =(event) =>{
 // documento.addEventListener("keyup", function (event) {
 //     // console.log("keyup",event);
 // });
+
 documento.addEventListener("keypress", numeros)
 telefono.addEventListener("keypress", numeros)
 nombre.addEventListener("keypress", letras)
 apellidos.addEventListener("keypress", letras)
+correo.addEventListener("blur", (event) => {
+    gmail(event, correo);
+})
