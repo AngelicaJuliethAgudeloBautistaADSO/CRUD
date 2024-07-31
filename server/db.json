@@ -1,0 +1,45 @@
+{
+  "users": [
+    {
+      "id": "be4d",
+      "first_name": "john",
+      "last_name": "2",
+      "address": "carrera 25 No 18 - 65 ",
+      "type_id": "2",
+      "email": "jfbecerra@sena.edu.co",
+      "phone": "3160410637",
+      "document": "1098654124"
+    },
+    {
+      "id": "96aa",
+      "first_name": "Jon",
+      "last_name": "1",
+      "address": "1600 Amphitheatre Parkway",
+      "type_id": "1",
+      "email": "test@example.us",
+      "phone": "6019521325",
+      "document": "10245712487"
+    },
+    {
+      "id": "c82c",
+      "first_name": "João",
+      "last_name": "1",
+      "address": "Av. dos Andradas, 3000",
+      "type_id": "1",
+      "email": "teste@exemplo.us",
+      "phone": "3121286800",
+      "document": "77373737373"
+    },
+    {
+      "id": "62c0",
+      "first_name": "Gottfried",
+      "last_name": "1",
+      "address": "Erika-Mann-Straße 33",
+      "type_id": "1",
+      "email": "test@beispiel.de",
+      "phone": "030303986300",
+      "document": "373737373"
+    }
+  ],
+  "documents": []
+}

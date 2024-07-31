@@ -1,7 +1,7 @@
 const is_number =(event) =>{
     if (event.keyCode < 48 || event.keyCode > 57) {
         event.preventDefault();
-        console.log("a");
+        // console.log("a");
     }
-}
+};
 export default is_number;
