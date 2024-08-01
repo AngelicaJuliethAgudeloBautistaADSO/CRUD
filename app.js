@@ -3,6 +3,7 @@ import is_number from "./module/is_number.js";
 import letras from "./module/letras.js";
 import remover from "./module/remover.js"
 import is_valid from "./module/is_valid.js";
+import solicitud from "./module/ajaxs.js";
 
 const $formulario = document.querySelector("form");
 const nombre = document.querySelector("#nombre");
@@ -23,8 +24,30 @@ const cantidad = (elemento) => {
         elemento.classList.add("correcto")
     }
 }
+
+const documentos= ()=>{
+    const fragmento = document.createDocumentFragment();
+    fetch('http://localhost:3000/documents')
+    .then((response) => response.json())
+    .then((data) => {
+        data.forEach(element => {
+            let option = document.createElement("option");
+            option.value = element.id;
+            option.textContent = element.name;
+            fragmento.appendChild(option)
+        });
+        tipo.appendChild(fragmento);
+    });
+}
+
+const listar = () => {
+    let data = solicitud("users");
+    console.log(data);
+}
+
 addEventListener("DOMContentLoaded", (event)=>{
-    // console.log(politicas.checked)
+    documentos()
+    listar()
     if (!politicas.checked) {
         boton.setAttribute("disable","");
     }
