@@ -7,14 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container layout mb-40 mt-40">
     <form class="form" novalidate>
         <div class="form__group">
             <label for="Nombre">Nombre</label>
-            <input  id="nombre" autocomplete="off"> 
+            <input  id="nombre" autocomplete="off" required> 
         </div>
         <div class="form__group">
             <label for="Apellidos">Apellidos</label>
-            <input  id="apellidos" autocomplete="off">
+            <input  id="apellidos" autocomplete="off" required>
         </div>
         <label for="telefono">telefono</label>
         <input type="number" id="telefono" autocomplete="off" required>
@@ -40,6 +41,34 @@
         <button type="summit" id="boton">Enviar</button>
         
     </form>
+    <div class="table">
+        <table>
+            <thead>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Telefono</th>
+                <th>Direccion</th>
+                <th>Tipo</th>
+                <th>Documento</th>
+                <th>Email</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <template id="tp_users">
+        <tr>
+            <td class="nombre"></td>
+            <td class="apellido"></td>
+            <td class="telefono"></td>
+            <td class="direccion"></td>
+            <td class="tipo"></td>
+            <td class="documento"></td>
+            <td class="email"></td>  
+        </tr>
+        
+    </template>
     <script src="app.js" type="module"></script>
 </body>
 </html>

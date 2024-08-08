@@ -3,9 +3,30 @@
     padding: 0;
     box-sizing: border-box;
 }
+.container{
+    width: 1600px;
+    margin: 0 auto;
+}
+.mt-40{
+    margin-top: 40px;
+}
+.mb-40{
+    margin-bottom: 40px;
+}
+/* layout */
+.layout{
+    display: grid;
+    grid-template-areas: "form table";
+    grid-template-columns: 400px 1frs;
+    gap: 1rem;
+}
+.form{
+
+}
+.table{
+
+}
 form{
-    max-width: 450px;
-    width: 450px;
     margin: 0 auto;
     background-color: #f2f2f2;
     padding: 30px;
