@@ -3,7 +3,7 @@ import is_number from "./module/is_number.js";
 import letras from "./module/letras.js";
 import remover from "./module/remover.js"
 import is_valid from "./module/is_valid.js";
-import solicitud from "./module/ajaxs.js";
+import solicitud, { enviar } from "./module/ajaxs.js";
 import { URL } from "./module/config.js";
 
 const $formulario = document.querySelector("form");
@@ -50,14 +50,27 @@ const documentos= ()=>{
 
 const listar = async () => {
     const data = await solicitud("users");
+    const documentos = await solicitud ("documents");
+
+    console.log(documentos);
+    
+    
+    
     data.forEach(element => {
+        let nombre= documentos.find((documento)=> documento.id === element.type_id);
+        console.log(nombre);
+        
+
         tp_users.querySelector(".nombre").textContent = element.first_name
         tp_users.querySelector(".apellido").textContent = element.last_name
         tp_users.querySelector(".telefono").textContent = element.phone
         tp_users.querySelector(".direccion").textContent = element.address
-        tp_users.querySelector(".tipo").textContent = element.type_id
+        tp_users.querySelector(".tipo").textContent = nombre
         tp_users.querySelector(".documento").textContent = element.document
         tp_users.querySelector(".email").textContent = element.email
+
+        tp_users.querySelector(".modificar").setAttribute("data-id", element.id)
+        tp_users.querySelector(".eliminar").setAttribute("data-id", element.id)
 
         const clone = document.importNode(tp_users, true);
         fragmento.appendChild(clone);
@@ -82,6 +95,18 @@ const createRow = (data) => {
     tdTipo.textContent = data.type_id;
     tdDocumento.textContent = data.document;
     tdEmail.textContent = data.email;
+
+    tdNombre.textContent = data.first_name;
+    tdApellido.textContent = data.last_name;
+}
+const buscar =(element)=>{
+    console.log(element.dataset.id)
+    enviar(`users/$(element.dataset.id)`,{
+        method: 'PACTH',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
 }
 
 addEventListener("DOMContentLoaded", (event)=>{
@@ -91,10 +116,17 @@ addEventListener("DOMContentLoaded", (event)=>{
         boton.setAttribute("disable","");
     }
 });
+document.addEventListener("click", (event)=>{
+    if(event.target.matches(".modificar")){
+        buscar(event.target)
+        
+    }
+})
 politicas.addEventListener("change", function(e){
     console.log(e.target.checked);
     if (e.target.checked) {
         boton.removeAttribute("disabled")
+        buscar
     }
 });
 
@@ -159,7 +191,6 @@ telefono.addEventListener("blur", (event) => {
 });
 
 
-
 documento.addEventListener("keypress", is_number);
 telefono.addEventListener("keypress", is_number);
 
@@ -176,3 +207,4 @@ direccion.addEventListener("blur", (event) => {
 documento.addEventListener("blur", (event)=> {
     remover(event, documento);
 });
+
