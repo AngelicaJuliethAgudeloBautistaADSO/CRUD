@@ -1,7 +1,7 @@
 import { URL } from "./config.js";
 const solicitud = async (url) => {
     let solicitud = await fetch(`${URL}/${url}`);//await : esperar que se resuelva la promesa
-    let data =await solicitud.json();
+    let data = await solicitud.json();
     return data
 } 
 
