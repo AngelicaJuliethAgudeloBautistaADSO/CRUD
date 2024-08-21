@@ -70,14 +70,16 @@ const listar = async () => {
     const data = await solicitud("users");
     const documentos = await solicitud ("documents");
     
-    data.forEach((element) => {
-        let nombr;
+    data.forEach(element => {
+        let nombr = documentos.find((documento) => documento.id === element.type_id).name;
         documentos.forEach((elem)=>{
             if (element.type_id == elem.id) {
                 console.log(elem.name);
                 nombr = elem.name
             }
         })
+        tp_users.querySelector("tr").id= `user_${element.id}`;
+
         tp_users.querySelector(".nombre").textContent = element.first_name;
         tp_users.querySelector(".apellido").textContent = element.last_name;
         tp_users.querySelector(".telefono").textContent = element.phone;
@@ -118,7 +120,7 @@ const createRow = (data) => {
 const buscar = async (element)=>{
     let id= element.dataset.id
     
-    const data = await enviar(`users/${id}`,{
+    const data = await enviar(`users/${element.dataset.id}`,{
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -148,7 +150,6 @@ const save = (event) =>{
 
 const guardar = (data) => {
     console.log(data);
-    return
     fetch(`${URL}/users`,{
         method: 'POST',
         body: JSON.stringify(data),
@@ -169,24 +170,40 @@ const guardar = (data) => {
 
 const actualiza = async (data) => {
     const response = await enviar (`users/${user.value}`,{
-        method: 'PUT',
+        method: 'PUT',//trabajamos con una API REST ful
         body: JSON.stringify(data),
         headers:{
             'Content-Type': 'application/json; charset=UTF-8',
         },
     });
-    //limpiar form
-    nombre.value="";
-
-    console.log(response)
+    limpiarForm();
+    editRow(response);
+    delet();
 }
 
 const limpiarForm = () => {
     nombre.value = "";
-    nombre.value = "";
-    nombre.value = "";
-    nombre.value = "";
-    nombre.value = "";
+    apellidos.value = "";
+    telefono.value = "";
+    direccion.value = "";
+    tipo.value = "";
+    documento.value = "";
+    email.value = "";
+}
+const editRow=(data)=>{
+    const tr = document.querySelector(`#user_${data.id}`);
+    
+    tr.querySelector(".nombre").textContent = data.first_name;
+    tr.querySelector(".apellido").textContent = data.last_name;
+    tr.querySelector(".telefono").textContent = data.phone;
+    tr.querySelector(".direccion").textContent = data.address;
+    tr.querySelector(".tipo").textContent = data.nombr;
+    tr.querySelector(".documento").textContent = data.document;
+    tr.querySelector(".email").textContent = data.email;
+}
+
+const delet = () => {
+    
 }
 
 const loadForm =(data)=>{
