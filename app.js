@@ -26,7 +26,7 @@ const cantidad = (elemento) => {
     if (valor) {
         alert("correcto")
         } else {
-            elemento.classList.remover("correcto")
+            elemento.classList.remove("correcto")
             elemento.classList.add("error")
         }           
 }
@@ -66,11 +66,36 @@ const documentos= ()=>{
         tipo.appendChild(fragmento);
     });
 }
-const listar = async () => {
-    const data = await solicitud("users");
+const listar = async (page) => {
+    const _page = page ? page : 1;
+    console.log(_page);
+    
+    const data = await solicitud(`users?_page=${_page}&_per_pages=8`);
     const documentos = await solicitud ("documents");
     
-    data.forEach(element => {
+const nav= document.querySelector(".navigation");
+const first =data.first;
+const prev = data.prev;
+const next = data.next;
+const last = data.last;
+
+console.log("first",first);
+console.log("prev",prev);
+console.log("next",next);
+console.log("last",last);
+
+nav.querySelector(".first").disabled = prev? false : true;
+nav.querySelector(".prev").disabled = prev ? false : true;
+nav.querySelector(".next").disabled = next ? false : true;
+nav.querySelector(".last").disabled = next ? false : true;
+
+nav.querySelector(".first").setAttribute("data-first",first);
+nav.querySelector(".prev").setAttribute("data-prev",prev);
+nav.querySelector(".next").setAttribute("data-next",next);
+nav.querySelector(".last").setAttribute("data-last",last);
+
+
+    data.data.forEach(element => {
         let nombr = documentos.find((documento) => documento.id === element.type_id).name;
         documentos.forEach((elem)=>{
             if (element.type_id == elem.id) {
@@ -110,11 +135,11 @@ const createRow = (data) => {
 
     tdNombre.textContent = data.first_name;
     tdApellido.textContent = data.last_name;
-    // tdTelefono.textContent = data.phone;
-    // tdDireccion.textContent = data.address;
-    // tdTipo.textContent = data.type_id;
-    // tdDocumento.textContent = data.document;
-    // tdEmail.textContent = data.email;
+    tdTelefono.textContent = data.phone;
+    tdDireccion.textContent = data.address;
+    tdTipo.textContent = data.type_id;
+    tdDocumento.textContent = data.document;
+    tdEmail.textContent = data.email;
 }
 //METODO BUSCAR 
 const buscar = async (element)=>{
@@ -174,16 +199,23 @@ const actualiza = async (data) => {
             'Content-Type': 'application/json; charset=UTF-8',
         },
     });
+    alert(data.phone)
     limpiarForm();
     editRow(response);
 }
 
-const eliminar = (element) => {
-    console.log(element);
-    let pregunta = confirm("desea elimar")
-    if (pregunta) {
-        
-    }
+const eliminar = async (element) => {
+    let id = element.dataset.id;
+    const tr = document.querySelector(`users/${id}`)
+
+    const response = await enviar (`users/${id}`,{
+        method: 'DELETE',
+        headers:{
+            'Content-Type': 'application/json; charset=UTF-8',
+        },
+    });
+    console.log(response);
+    
 }
 const limpiarForm = () => {
     nombre.value = "";
@@ -245,6 +277,39 @@ document.addEventListener("click", (e)=>{
     }
     if(e.target.matches(".eliminar")){
         eliminar(e.target);
+    }
+    ////////////////////////////////////////////
+    if (e.target.matches(".first")) {
+        const nodos = tbody;
+        const first = e.target.dataset.first;
+        while (nodos.firstChild) {
+            nodos.removeChild(nodos.firstChild);
+        }
+        listar(first)
+    }
+    if (e.target.matches(".prev")) {
+        const nodos = tbody;
+        const prev = e.target.dataset.prev;
+        while (nodos.firstChild) {
+            nodos.removeChild(nodos.firstChild);
+        }
+        listar(prev)
+    }
+    if (e.target.matches(".next")) {
+        const nodos = tbody;
+        const next = e.target.dataset.next;
+        while (nodos.firstChild) {
+            nodos.removeChild(nodos.firstChild);
+        }
+        listar(next)
+    }
+    if (e.target.matches(".last")) {
+        const nodos = tbody;
+        const last = e.target.dataset.last;
+        while (nodos.firstChild) {
+            nodos.removeChild(nodos.firstChild);
+        }
+        listar(last)
     }
 });
 
