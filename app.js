@@ -162,8 +162,6 @@ const guardar = (data) => {
 
         limpiarForm()
 
-
-
         createRow(json)
     });
 }
@@ -178,9 +176,15 @@ const actualiza = async (data) => {
     });
     limpiarForm();
     editRow(response);
-    delet();
 }
 
+const eliminar = (element) => {
+    console.log(element);
+    let pregunta = confirm("desea elimar")
+    if (pregunta) {
+        
+    }
+}
 const limpiarForm = () => {
     nombre.value = "";
     apellidos.value = "";
@@ -202,9 +206,6 @@ const editRow=(data)=>{
     tr.querySelector(".email").textContent = data.email;
 }
 
-const delet = () => {
-    
-}
 
 const loadForm =(data)=>{
     const {
@@ -241,6 +242,9 @@ addEventListener("DOMContentLoaded", (event)=>{
 document.addEventListener("click", (e)=>{
     if(e.target.matches(".modificar")){
         buscar(e.target);
+    }
+    if(e.target.matches(".eliminar")){
+        eliminar(e.target);
     }
 });
 
